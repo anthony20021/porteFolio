@@ -38,7 +38,6 @@ Homestead.yaml
 /_ide_helper_models.php
 
 # Ignore custom config files
-config/*.php
 resources/views/vendor
 
 # Ignore specific files related to deployments
