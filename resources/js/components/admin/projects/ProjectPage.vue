@@ -179,7 +179,7 @@ export default {
                     cancelButtonText: "Annuler"
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        let response = await post(baseurl + link, { id: data.id }, 'DELETE');
+                        let response = await axios.delete(baseurl + link, { id: data.id }, 'DELETE');
                         if (response.statut == 'ok') {
                             this.Toast.fire(result.message, '', 'success');
                         }
