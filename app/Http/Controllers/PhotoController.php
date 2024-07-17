@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CodesDocuments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +60,13 @@ class PhotoController extends Controller
                 $documentTable->save();
             }
 
+            if($table == 'code') {
+                $documentTable = new CodesDocuments();
+                $documentTable->id_code = $id;
+                $documentTable->id_document = $documentId;
+                $documentTable->save();
+            }
+
 
             DB::commit();
             return response()->json([
@@ -90,6 +98,13 @@ class PhotoController extends Controller
     
             if ($table == 'project') {
                 $documentTable = ProjectsDocuments::where('id_project', $id)->first();
+                if ($documentTable) {
+                    $documentTable->delete();
+                }
+            }
+
+            if ($table == 'code') {
+                $documentTable = CodesDocuments::where('id_code', $id)->first();
                 if ($documentTable) {
                     $documentTable->delete();
                 }

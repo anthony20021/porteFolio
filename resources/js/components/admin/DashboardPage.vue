@@ -19,13 +19,15 @@
 
         <div class="pt-3" style="width: 100%;">
             <!-- Mettre des components -->
-             <project-page v-if="components == 1" :projects="projects" ></project-page>
+            <project-page v-if="components == 1" :projects="projects" ></project-page>
+            <code-page v-if="components == 2" :codes="codes" ></code-page>
         </div>
 
     </div>
 </template>
 <script>
 import ProjectPage from './projects/ProjectPage.vue';
+import CodePage from './codes/CodePage.vue';
 
 export default {
 
@@ -42,6 +44,7 @@ export default {
     },
 
     Components: {
+        CodePage,
         ProjectPage,
     },
 

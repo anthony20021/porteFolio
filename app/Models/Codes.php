@@ -11,9 +11,21 @@ class Codes extends Model
     public $timestamps = false;
     public $incrementing = true; //pour les cle primaires multiples
 
-    // protected $fillable = [
-    // ];
+    protected $fillable = [
+        'name',
+        'desc',
+        'front_page',
+    ];
     
+    public function codeDocuments()
+    {
+        return $this->hasMany(ProjectsDocuments::class, 'id_code', 'id');
+    }
+
+    public function documents()
+    {
+        return $this->hasManyThrough(Documents::class, CodesDocuments::class, 'id_code', 'id', 'id', 'id_document');
+    }
 
     /**
      * The attributes that are mass assignable.

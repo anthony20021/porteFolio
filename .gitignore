@@ -17,6 +17,8 @@
 /public/hot
 /public/css/*.css
 /public/js/*.js
+/public/images
+!/public/images/vendor/
 
 # Ignore Laravel package discover
 /vendor/composer/installed.json

@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $codes = Codes::all();
+        $codes = Codes::selectRaw('*,FALSE AS show_description')->with('documents')->get();;
         $experiences = Experiences::all();
         $projects = Projects::selectRaw('*,FALSE AS show_description')->with('documents')->get();
         $cv = Cv::all();
@@ -58,6 +58,7 @@ class AdminController extends Controller
                 'id' => 'required',
                 'name' => 'required',
                 'desc' => 'required',
+                'front_page' => 'required',
             ])->validate();
     
             $project = Projects::find($validatedData['id']);
@@ -67,6 +68,113 @@ class AdminController extends Controller
                 'statut' => 'ok',
                 'message' => 'Le projet a bien été mis à jour',
                 'data' => $project,
+            ];
+            return response()->json($result);
+        } catch (\Throwable $th) {            
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($result, 400);
+        }
+    }
+
+    public function deleteProject(Request $request){
+        try {
+            $data = $request->input('data');
+    
+            $validatedData = Validator::make($data, [
+                'id' => 'required',
+            ])->validate();
+    
+            $project = Projects::find($validatedData['id']);
+            $project->delete();
+    
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le projet a bien été supprimé',
+                'data' => $project,
+            ];
+            return response()->json($result);
+        } catch (\Throwable $th) {            
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage()                
+            ];
+            return response()->json($result, 400);
+        }
+    }
+
+    public function saveCode(Request $request){
+        try {
+            $data = $request->input('data');
+    
+            $validatedData = Validator::make($data, [
+                'name' => 'required',
+                'desc' => 'required',
+            ])->validate();
+    
+            $new_code = Codes::create($validatedData);
+    
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le code a bien été sauvegardé',
+                'data' => $new_code,
+            ];
+            return response()->json($result);
+        } catch (\Throwable $th) {
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($result, 400);
+        }
+    }
+
+    public function putCode(Request $request){
+        try {
+            $data = $request->input('data');
+    
+            $validatedData = Validator::make($data, [
+                'id' => 'required',
+                'name' => 'required',
+                'desc' => 'required',
+                'front_page' => 'required',
+            ])->validate();
+    
+            $code = Codes::find($validatedData['id']);
+            $code->update($validatedData);
+    
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le code a bien été mis à jour',
+                'data' => $code,
+            ];
+            return response()->json($result);
+        } catch (\Throwable $th) {            
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($result, 400);
+        }
+    }
+
+    public function deleteCode(Request $request){
+        try {
+            $data = $request->input('data');
+    
+            $validatedData = Validator::make($data, [
+                'id' => 'required',
+            ])->validate();
+    
+            $code = Codes::find($validatedData['id']);
+            $code->delete();
+    
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le code a bien été supprimé',
+                'data' => $code,
             ];
             return response()->json($result);
         } catch (\Throwable $th) {            

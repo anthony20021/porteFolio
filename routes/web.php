@@ -29,6 +29,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('gestion')->group(function () {
         Route::post('/project/save', [App\Http\Controllers\AdminController::class, 'saveProject']);
         Route::put('/project/save', [App\Http\Controllers\AdminController::class, 'putProject']);
+        Route::delete('/project', [App\Http\Controllers\AdminController::class, 'deleteProject']);
+        Route::post('/code/save', [App\Http\Controllers\AdminController::class, 'saveCode']);
+        Route::put('/code/save', [App\Http\Controllers\AdminController::class, 'putCode']);
+        Route::delete('/code', [App\Http\Controllers\AdminController::class, 'deleteCode']);
         Route::post('/photo', [App\Http\Controllers\PhotoController::class, 'save']);
         Route::delete('/photo', [App\Http\Controllers\PhotoController::class, 'delete']);
     });

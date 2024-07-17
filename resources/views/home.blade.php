@@ -3,7 +3,7 @@
 @extends('layouts.app')
 @section('content')
 <div id = "home">
-    <home-page :projects="{{ json_encode($projects) }}"></home-page>
+    <home-page :projects="{{ json_encode($projects) }}" :codes="{{ json_encode($codes) }}"></home-page>
 </div>
 
 @endsection
@@ -14,6 +14,7 @@
                 el: '#home',
                 props : {
                     projects: [],
+                    codes: [],
                 }
             });
         });

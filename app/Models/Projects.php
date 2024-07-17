@@ -15,6 +15,7 @@ class Projects extends Model
         'name',
         'desc',
         'path',
+        'front_page',
     ];
     
     public function projectDocuments()
