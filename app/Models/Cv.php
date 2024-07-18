@@ -11,9 +11,16 @@ class Cv extends Model
     public $timestamps = false;
     public $incrementing = true; //pour les cle primaires multiples
 
-    // protected $fillable = [
-    // ];
+    protected $fillable = [
+        'name',
+        'desc',
+        'front_page',
+    ];
     
+    public function file()
+    {
+        return $this->belongsTo(Documents::class, 'document_id');
+    }
 
     /**
      * The attributes that are mass assignable.

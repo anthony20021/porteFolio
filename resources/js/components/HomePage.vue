@@ -52,7 +52,12 @@
           <!-- Section 3: Expériences -->
           <div v-if="index === 2">
             <h2 class="mb-5">Mes expériences :</h2>
-            <!-- Ajoutez ici le contenu de vos expériences -->
+            <div v-for="experience in experiences" class="d-flex" style="align-items: center; justify-content: space-around; width: 100%;">
+              <h4>{{experience.name}}</h4>
+              <div v-for="document in experience.documents">
+                <img :src="document.path" alt="Photo du projet">
+              </div>
+            </div>
           </div>
   
           <!-- Section 4: Projets -->
@@ -72,12 +77,24 @@
             <h2 class="mb-5">Quelques bouts de code (c'est gratuit) :</h2>
             <div v-for="code in codes" class="d-flex" style="align-items: center; justify-content: space-around; width: 100%;">
               <h4>{{code.name}}</h4>
+              <div v-html="code.desc">
+              </div>
               <div v-for="document in code.documents">
                 <img :src="document.path" alt="Photo du projet">
               </div>
               <button class="btn btn-warning" v-if="!!code.file" @click="download(code.file.path)">Télécharger</button>
             </div>
           </div>
+
+          <!-- Section 6: CV -->
+          <div v-if="index === 5">
+            <h2 class="mb-5">Mon CV :</h2>
+            <div v-for="oneCv in cv" class="d-flex" style="align-items: center; justify-content: space-around; width: 100%;">
+              <h4>{{oneCv.name}}</h4>
+              <button class="btn btn-warning" v-if="!!cv.file" @click="download(oneCv.file.path)">Télécharger</button>
+            </div>
+          </div>
+
         </div>
         <div class="navigation-buttons">
           <button v-if="index > 0" class="btn btn-primary" @click="changeEtatMoins">Previous( )</button>
@@ -102,13 +119,16 @@
           { name: 'Maîtrises' },
           { name: 'Expériences' },
           { name: 'Projets' },
-          { name: 'Code Snippets' }
+          { name: 'Code Snippets' },
+          { name: 'CV' },
         ]
       }
     },
     props: {
       projects: Array,
       codes: Array,
+      experiences : Array,
+      cv : Array,
     },
     mounted() {
       this.initializeAnimation();
@@ -280,7 +300,7 @@
   
   @media screen and (max-width: 980px) {
     .end-position h1 {
-      font-size: 23px;
+      font-size: 20px;
     }
     .logo-container {
       flex-direction: column;

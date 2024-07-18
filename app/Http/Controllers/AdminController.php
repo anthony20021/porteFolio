@@ -19,7 +19,7 @@ class AdminController extends Controller
         $codes = Codes::selectRaw('*,FALSE AS show_description')->with('documents')->get();
         $experiences = Experiences::selectRaw('*,FALSE AS show_description')->get();
         $projects = Projects::selectRaw('*,FALSE AS show_description')->with('documents')->get();
-        $cv = Cv::all();
+        $cv = Cv::selectRaw('*,FALSE AS show_description')->get();
 
         return view('admin.index', ["projects" => $projects, "codes"=> $codes, "experiences"=>$experiences, "cv" => $cv]);
     }
@@ -171,6 +171,12 @@ class AdminController extends Controller
             ])->validate();
     
             $code = Codes::find($validatedData['id']);
+
+            $doc = Documents::find($code->document_id);
+            
+            //delete doc
+            File::delete(public_path($doc->path));
+            $doc->delete();
             $code->delete();
     
             $result = [
@@ -327,5 +333,155 @@ class AdminController extends Controller
             return response()->json($result, 400);
         }
     }
+
+    public function saveCv(Request $request){
+        try {
+            $data = $request->input('data');
+            $validatedData = Validator::make($data, [
+                'name' => 'required',
+                'desc' => 'required',
+            ])->validate();
+            $cv = Cv::create($validatedData);
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le cv a bien été sauvegardé',
+                'data' => $cv,
+            ];
+            return response()->json($result);
+        } catch (\Throwable $th) {
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($result, 400);
+        }
+    }
+
+    public function deleteCv(Request $request){
+        try {
+            $data = $request->input('data');
+    
+            $validatedData = Validator::make($data, [
+                'id' => 'required',
+            ])->validate();
+    
+            $cv = Cv::find($validatedData['id']);
+
+            $doc = Documents::find($cv->document_id);
+            
+            //delete doc
+            File::delete(public_path($doc->path));
+            $doc->delete();
+            $cv->delete();
+    
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le cv a bien été supprimé',
+                'data' => $cv,
+            ];
+            return response()->json($result);
+        } catch (\Throwable $th) {            
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($result, 400);
+        }
+    }
+
+    public function putCv(Request $request){
+        try {
+            $data = $request->input('data');
+            $validatedData = Validator::make($data, [
+                'id' => 'required',
+                'name' => 'required',
+                'desc' => 'required',
+                'front_page' => 'required',
+            ])->validate();
+            $cv = Cv::find($data['id']);
+            $cv->update($data);
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le cv a bien été modifié',
+                'data' => $cv,
+            ];
+            return response()->json($result);
+        } catch (\Throwable $th) {
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($result, 400);
+        }
+    }
+
+    public function saveCvFile(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+    
+            // Validate the request inputs
+            $this->validate($request, [
+                'file' => 'required|max:20480|file', 
+                'id' => 'required|integer',  
+            ]);
+    
+            $id = $request->input('id');
+            $cv = Cv::findOrFail($id); 
+    
+            $file = $request->file('file');
+            $name = strtolower(str_replace(' ', '_', $cv->name . '_file'));
+            $extension = $file->guessExtension();
+            $filename = $name . '.' . $extension;
+    
+            $storagePath = public_path('file');
+            if (!File::isDirectory($storagePath)) {
+                File::makeDirectory($storagePath, 0777, true, true);
+            }
+
+            if($cv['document_id'] != null){
+                $document = Documents::find($cv['document_id']);
+                $document->delete();
+                //delete in public path
+                $path = public_path($document->path);
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+            }
+
+
+            $filePath = 'file/' . $filename;
+            $file->move($storagePath, $filename);  
+    
+            $fileBd = new Documents();
+            $fileBd->name = $name;
+            $fileBd->path = $filePath;
+            $fileBd->type = $extension;
+            $fileBd->save();
+    
+            $cv->document_id = $fileBd->id;
+            $cv->save();
+    
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le cv a bien été sauvegardé',
+                'data' => $cv,
+            ];
+    
+            DB::commit();
+            return response()->json($result);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+    
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage(),
+            ];
+    
+            return response()->json($result, 400);
+        }
+    }
+
+    
 
 }

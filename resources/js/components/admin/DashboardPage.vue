@@ -22,11 +22,13 @@
             <project-page v-if="components == 1" :projects="projects" ></project-page>
             <code-page v-if="components == 2" :codes="codes" ></code-page>
             <experience-page v-if="components == 3" :experiences="experiences" ></experience-page>
+            <cv-page v-if="components == 4" :cv="cv"></cv-page>
         </div>
 
     </div>
 </template>
 <script>
+import CvPage from './cv/CvPage.vue';
 import ExperiencePage from './experiences/ExperiencePage.vue';
 import ProjectPage from './projects/ProjectPage.vue';
 import CodePage from './codes/CodePage.vue';
@@ -36,7 +38,8 @@ export default {
     props: {
         codes: Array,
         experiences: Array,
-        projects: Array,    
+        projects: Array,
+        cv: Array,    
     },
 
     data() {
@@ -49,6 +52,7 @@ export default {
         CodePage,
         ProjectPage,
         ExperiencePage,
+        CvPage,
     },
 
     methods: {
