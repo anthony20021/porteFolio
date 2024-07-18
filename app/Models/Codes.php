@@ -15,6 +15,7 @@ class Codes extends Model
         'name',
         'desc',
         'front_page',
+        'document_id',
     ];
     
     public function codeDocuments()
@@ -25,6 +26,12 @@ class Codes extends Model
     public function documents()
     {
         return $this->hasManyThrough(Documents::class, CodesDocuments::class, 'id_code', 'id', 'id', 'id_document');
+    }
+
+
+    public function file()
+    {
+        return $this->belongsTo(Documents::class, 'document_id');
     }
 
     /**

@@ -33,6 +33,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/code/save', [App\Http\Controllers\AdminController::class, 'saveCode']);
         Route::put('/code/save', [App\Http\Controllers\AdminController::class, 'putCode']);
         Route::delete('/code', [App\Http\Controllers\AdminController::class, 'deleteCode']);
+        Route::post('/code/file', [App\Http\Controllers\AdminController::class, 'saveCodeFile']);
+        Route::post('/experience/save', [App\Http\Controllers\AdminController::class, 'saveExperience']);
+        Route::put('/experience/save', [App\Http\Controllers\AdminController::class, 'putExperience']);
+        Route::delete('/experience', [App\Http\Controllers\AdminController::class, 'deleteExperience']);
         Route::post('/photo', [App\Http\Controllers\PhotoController::class, 'save']);
         Route::delete('/photo', [App\Http\Controllers\PhotoController::class, 'delete']);
     });

@@ -11,8 +11,11 @@ class Experiences extends Model
     public $timestamps = false;
     public $incrementing = true; //pour les cle primaires multiples
 
-    // protected $fillable = [
-    // ];
+    protected $fillable = [
+        'name',
+        'desc',
+        'front_page',
+    ];
     
 
     /**

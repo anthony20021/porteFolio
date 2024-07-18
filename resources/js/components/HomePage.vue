@@ -1,7 +1,7 @@
 <template>
     <div class="animate-title" :class="[start ? 'end-position' : 'start-position', 'anton-sc-bold', boucle ? 'boucle-on' : 'boucle-off']" ref="page" @wheel="handleWheel">
       <div v-for="(section, index) in sections" :key="index" class="section" :ref="'section' + index">
-        <div class="section-content">
+        <div class="section-content"  :class="(index === 4 || index === 3) ? 'w-100' : ''">
           <!-- Section 1: Accueil -->
           <div v-if="index === 0">
             <h1 style="text-decoration: underline; font-weight: 700;">
@@ -60,10 +60,10 @@
             <h2 class="mb-5">Mes projets :</h2>
             <div v-for="project in projects" class="d-flex" style="align-items: center; justify-content: space-around; width: 100%;">
               <h4>{{project.name}}</h4>
-              <div v-for="document in project.documents">
+              <div v-if="document.type === 'png' || document.type === 'jpg' || document.type === 'jpeg' || document.type === 'svg' || document.type === 'webp'" v-for="document in project.documents">
                 <img :src="document.path" alt="Photo du projet">
               </div>
-              <button class="btn btn-warning">Voir</button>
+              <button  class="btn btn-warning">Voir</button>
             </div>
           </div>
   
@@ -75,7 +75,7 @@
               <div v-for="document in code.documents">
                 <img :src="document.path" alt="Photo du projet">
               </div>
-              <button class="btn btn-warning">Télécharger</button>
+              <button class="btn btn-warning" v-if="!!code.file" @click="download(code.file.path)">Télécharger</button>
             </div>
           </div>
         </div>
@@ -123,6 +123,15 @@
           this.invertBoucle();
         }, 7020);
       },
+
+      download(path){
+        let a = document.createElement('a');
+        a.href = path;
+        a.download = path;
+        a.click();
+        a.remove();
+      },
+
       setupSections() {
         this.$nextTick(() => {
           this.sections.forEach((_, index) => {

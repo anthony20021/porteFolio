@@ -21,11 +21,13 @@
             <!-- Mettre des components -->
             <project-page v-if="components == 1" :projects="projects" ></project-page>
             <code-page v-if="components == 2" :codes="codes" ></code-page>
+            <experience-page v-if="components == 3" :experiences="experiences" ></experience-page>
         </div>
 
     </div>
 </template>
 <script>
+import ExperiencePage from './experiences/ExperiencePage.vue';
 import ProjectPage from './projects/ProjectPage.vue';
 import CodePage from './codes/CodePage.vue';
 
@@ -46,6 +48,7 @@ export default {
     Components: {
         CodePage,
         ProjectPage,
+        ExperiencePage,
     },
 
     methods: {
