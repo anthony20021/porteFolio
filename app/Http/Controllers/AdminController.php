@@ -16,10 +16,10 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $codes = Codes::selectRaw('*,FALSE AS show_description')->with('documents')->get();
+        $codes = Codes::selectRaw('*,FALSE AS show_description')->with('documents')->with('file')->get();
         $experiences = Experiences::selectRaw('*,FALSE AS show_description')->get();
         $projects = Projects::selectRaw('*,FALSE AS show_description')->with('documents')->get();
-        $cv = Cv::selectRaw('*,FALSE AS show_description')->get();
+        $cv = Cv::selectRaw('*,FALSE AS show_description')->with('file')->get();
 
         return view('admin.index', ["projects" => $projects, "codes"=> $codes, "experiences"=>$experiences, "cv" => $cv]);
     }
@@ -336,6 +336,10 @@ class AdminController extends Controller
 
     public function saveCv(Request $request){
         try {
+            $cvs = Cv::all();
+            if(count($cvs) > 0){
+                return response()->json(['statut' => 'error', 'message' => "il peut n'y avoir qu'un CV"], 400);
+            }
             $data = $request->input('data');
             $validatedData = Validator::make($data, [
                 'name' => 'required',

@@ -63,6 +63,7 @@
                         <input type="file" class="form-control" @change="checkFile($event)">
                     </td>
                     <td class="aligne-middle">
+                        <button class="btn btn-warning" v-if="!!code.file" @click="download(code.file.path)">Télécharger {{ code.file.name }}</button>
                         <button class="btn btn-success" @click="save(code, '/gestion/code/save')">Enregistrer</button>
                         <button class="btn btn-danger" @click="suppr(code, '/gestion/code')">Supprimer</button>
                     </td>
@@ -113,6 +114,14 @@ export default {
     },
 
     methods: {
+
+        download(path){
+            let a = document.createElement('a');
+            a.href = path;
+            a.download = path;
+            a.click();
+            a.remove();
+        },
 
         checkFile(e) {
             this.file = e.target.files[0];

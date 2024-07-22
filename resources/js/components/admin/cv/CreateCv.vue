@@ -64,8 +64,7 @@ export default {
     methods: {
 
         async save(data, link) {
-
-            if (data.name != '' || data.desc != '') {
+            if (data.name !== '' || data.desc !== '') {
                 Swal.fire({
                     title: "Sauvegarder ?",
                     icon: "warning",
@@ -76,26 +75,30 @@ export default {
                     cancelButtonText: "Annuler"
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        let response = await axios.post(baseurl + link, { data: data }, 'POST');
-                        response = response.data
-                        console.log(response);
-                        if (response.statut == 'ok') {
-                            this.Toast.fire(response.message, '', 'success');
-                        }
-                        else {
-                            this.Toast.fire(response.message, '', 'error');
+                        try {
+                            let response = await axios.post(baseurl + link, { data: data }, 'POST');
+                            response = response.data;
+                            console.log(response);
+                            if (response.statut === 'ok') {
+                                this.Toast.fire(response.message, '', 'success');
+                            } else {
+                                this.Toast.fire(response.message, '', 'error');
+                            }
+                        } catch (error) {
+                            console.error(error);
+                            Swal.fire({
+                                title: "Erreur",
+                                text: "Une erreur s'est produite lors de la sauvegarde. Veuillez réessayer.",
+                                icon: "error",
+                                confirmButtonText: "OK"
+                            });
                         }
                     }
-
-
-
                 });
-
-            }
-            else {
+            } else {
                 this.Toast.fire("Veuillez remplir tous les champs", '', 'error');
             }
-        },
+        }
 
     }
 }

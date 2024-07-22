@@ -1,7 +1,7 @@
 <template>
     <div class="animate-title" :class="[start ? 'end-position' : 'start-position', 'anton-sc-bold', boucle ? 'boucle-on' : 'boucle-off']" ref="page" @wheel="handleWheel">
       <div v-for="(section, index) in sections" :key="index" class="section" :ref="'section' + index">
-        <div class="section-content"  :class="(index === 4 || index === 3) ? 'w-100' : ''">
+        <div class="section-content"  :class="(index === 4 || index === 3 || index === 5) ? 'w-100' : ''">
           <!-- Section 1: Accueil -->
           <div v-if="index === 0">
             <h1 style="text-decoration: underline; font-weight: 700;">
@@ -68,7 +68,9 @@
               <div v-if="document.type === 'png' || document.type === 'jpg' || document.type === 'jpeg' || document.type === 'svg' || document.type === 'webp'" v-for="document in project.documents">
                 <img :src="document.path" alt="Photo du projet">
               </div>
-              <button  class="btn btn-warning">Voir</button>
+              <a :href="`/project/${project.id}`">
+                <button  class="btn btn-warning">Voir</button>
+              </a>
             </div>
           </div>
   
@@ -91,7 +93,7 @@
             <h2 class="mb-5">Mon CV :</h2>
             <div v-for="oneCv in cv" class="d-flex" style="align-items: center; justify-content: space-around; width: 100%;">
               <h4>{{oneCv.name}}</h4>
-              <button class="btn btn-warning" v-if="!!cv.file" @click="download(oneCv.file.path)">Télécharger</button>
+              <button class="btn btn-warning" v-if="!!oneCv.file" @click="download(oneCv.file.path)">Télécharger</button>
             </div>
           </div>
 
@@ -102,7 +104,7 @@
         </div>
       </div>
       <div style="position: fixed; right: 0; bottom: 0;">
-        <p class="m-0">Site créé avec Laravel, Vue.js et PostgreSQL</p>
+        <p class="m-0 site">Site créé avec Laravel, Vue.js et PostgreSQL</p>
       </div>
     </div>
   </template>
@@ -272,11 +274,11 @@
   }
   
   .boucle-on {
-    right: 10px;
+    right: -2px;
   }
   
   .boucle-off {
-    right: -10px;
+    right: -20px;
   }
   
   .end-position {
@@ -308,6 +310,9 @@
     img {
       height: 64px;
       width: auto;
+    }
+    .site{
+      font-size: 10px;
     }
   }
   </style>

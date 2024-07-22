@@ -21,6 +21,9 @@ Auth::routes([
   ]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/project/{id}', [App\Http\Controllers\PageController::class, 'indexProject']);
+Route::get('/projects', [App\Http\Controllers\PageController::class, 'indexProjectAll']);
+Route::get('/cv' , [App\Http\Controllers\PageController::class, 'indexCv']);
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
 
