@@ -108,8 +108,9 @@
       </div>
     </div>
   </template>
-  
+
   <script>
+
   export default {
     data() {
       return {
@@ -132,6 +133,7 @@
       experiences : Array,
       cv : Array,
     },
+
     mounted() {
       this.initializeAnimation();
       this.setupSections();
@@ -207,7 +209,7 @@
     scroll-snap-type: y mandatory;
     color: #ffbf00;
     font-weight: 900 !important;
-    transition: top 3s, right 3s;
+    transition: top 3s, right 9s;
     text-shadow: rgba(0, 0, 0, 0.158) 2px 5px;
   }
   
@@ -270,19 +272,19 @@
   }
   
   .start-position {
-    top: 6000px;
+    top: 600px;
   }
   
   .boucle-on {
-    right: -2px;
-  }
-  
-  .boucle-off {
     right: -20px;
   }
   
+  .boucle-off {
+    right: 10px;
+  }
+  
   .end-position {
-    top: 0;
+    top: 10px;
   }
   
   img {

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <ContactModal></ContactModal>
         <nav v-if="screenWidth > 900" id="mainNavBar" class="navbar navbar-expand-md navbar-light position-fixed col-12 bg-black mb-1 anton-sc-regular"
         style="top:0px; z-index: 1000000; box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.493);">
             <div class="container">
@@ -10,7 +11,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 16px">
                     <ul class="navbar-nav me-auto" style="align-items: center">
                         <li class="nav-items">
-                            <button class="btn btn-warning text-dark">Me contacter</button>
+                            <button @click="openModal()" class="btn btn-warning text-dark">Me contacter</button>
                         </li>
                         <li class="nav-items">
                             <a class="nav-link  text-light" href="/cv">Mon CV</a>
@@ -50,28 +51,33 @@
             <div id="navBar" :style="{ right: navBarRight }" class=" position-fixed bg-black">
                 <ul class="navbar-nav">
                     <li class="nav-items">
-                        <button class="btn btn-warning text-light">Me contacter</button>
+                        <button @click="openModal()" class="btn btn-warning text-light">Me contacter</button>
                     </li>
                     <li class="nav-items">
-                        <a class="nav-link  text-light" href="/metier/all">Mon CV</a>
+                        <a class="nav-link  text-light" href="/cv">Mon CV</a>
                     </li>
                     <li class="nav-items">
-                        <a class="nav-link  text-light" href="/offre/all">Mes projets</a>
+                        <a class="nav-link  text-light" href="/projects">Mes projets</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li v-if="current_user" class="nav-item">
                         <a class="nav-link  text-light" style="cursor: pointer;" @click="logout()">Déconnexion</a>
                     </li>
+                    <li v-if="current_user" class="nav-items">
+                        <a class="nav-link  text-light" href="/dashboard">Tableau de bord</a>
+                    </li>
                 </ul>
             </div>
             <div style="position: fixed; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.493); z-index: 1000000;" @click="toggleNavBar" v-if="navBarRight !== '-200px'">
             </div>
         </div>
-</div>
+    </div>
 </template>
 
 <script>
+
+import ContactModal from './ContactModal.vue';
 
 export default {
     data() {
@@ -85,9 +91,17 @@ export default {
         current_user: Object
     },
 
+    components: {
+        ContactModal,
+    },
+
     methods: {
         updateScreenWidth() {
             this.screenWidth = window.innerWidth;
+        },
+
+        openModal() {
+            $('#contactModal').modal('show')
         },
 
         async logout() {
