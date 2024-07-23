@@ -4,13 +4,14 @@
         <div class="section-content"  :class="(index === 4 || index === 3 || index === 5) ? 'w-100' : ''">
           <!-- Section 1: Accueil -->
           <div v-if="index === 0">
-            <h1 style="text-decoration: underline; font-weight: 700;">
+            <h1 style="text-decoration: underline; font-weight: 700;" class="title-text">
               <span style="color: #dddea5;">Gonzalez</span>
               <span style="color: #b973ad;">( ){ </span>
               <span style="color: #b973ad;">return </span>
               <span style="color: #66aac6;">Anthony</span>
               <span style="color: #b973ad;"> }</span>
             </h1>
+            <p>full stack web developer</p>
             <p style="color: #fad76d;">Portfolio</p>
           </div>
   
@@ -282,6 +283,10 @@
   .boucle-off {
     right: 10px;
   }
+
+  .title-text{
+    display: flex;
+  }
   
   .end-position {
     top: 10px;
@@ -304,7 +309,7 @@
   
   @media screen and (max-width: 980px) {
     .end-position h1 {
-      font-size: 20px;
+      font-size: 45px;
     }
     .logo-container {
       flex-direction: column;
@@ -314,7 +319,10 @@
       width: auto;
     }
     .site{
-      font-size: 10px;
+      font-size: 20px;
+    }
+    .title-text{
+      flex-direction: column;
     }
   }
   </style>
