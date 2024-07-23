@@ -8,6 +8,7 @@ use App\Models\Documents;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Experiences;
+use App\Models\Messages;
 use App\Models\Projects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +21,9 @@ class AdminController extends Controller
         $experiences = Experiences::selectRaw('*,FALSE AS show_description')->get();
         $projects = Projects::selectRaw('*,FALSE AS show_description')->with('documents')->get();
         $cv = Cv::selectRaw('*,FALSE AS show_description')->with('file')->get();
+        $messages = Messages::orderBy('date')->get();
 
-        return view('admin.index', ["projects" => $projects, "codes"=> $codes, "experiences"=>$experiences, "cv" => $cv]);
+        return view('admin.index', ["projects" => $projects, "codes"=> $codes, "experiences"=>$experiences, "cv" => $cv, "messages" => $messages]);
     }
 
     // Project

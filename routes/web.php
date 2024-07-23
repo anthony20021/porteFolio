@@ -25,6 +25,7 @@ Route::get('/project/{id}', [App\Http\Controllers\PageController::class, 'indexP
 Route::get('/projects', [App\Http\Controllers\PageController::class, 'indexProjectAll']);
 Route::get('/cv' , [App\Http\Controllers\PageController::class, 'indexCv']);
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contact']);
 
 
 Route::middleware(['auth'])->group(function () {
@@ -46,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/cv/file', [App\Http\Controllers\AdminController::class, 'saveCvFile']);
         Route::post('/photo', [App\Http\Controllers\PhotoController::class, 'save']);
         Route::delete('/photo', [App\Http\Controllers\PhotoController::class, 'delete']);
+        Route::post('/message', [App\Http\Controllers\SendMailController::class, 'sendEmail']);
     });
 });
 

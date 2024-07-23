@@ -13,6 +13,10 @@
                             <input id="nom" type="text" class="form-control" v-model="contact.name">
                         </div>
                         <div class="form-group">
+                            <label for="nom">Prenom</label>
+                            <input id="nom" type="text" class="form-control" v-model="contact.firstname">
+                        </div>
+                        <div class="form-group">
                             <label for="email">Email</label>
                             <input id="email" type="email" class="form-control" v-model="contact.email">
                         </div>
@@ -26,7 +30,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="mb-5 mt-3">
-                                <button class="btn btn-success" data-bs-dismiss="modal" @click="save(contact, '/gestion/contact/save')">Valider</button>
+                                <button class="btn btn-success" data-bs-dismiss="modal" @click="save(contact, '/contact')">Valider</button>
                             </div>
                         </div>
                     </div>
@@ -51,24 +55,40 @@ export default {
         return {
             contact: {
                 name: '',
+                firstname: '',
                 email: '',
                 sujet: '',
                 message: '',
-            }
+            },
+            Toast : Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                customClass: {
+                    container: 'toast-perso' 
+                },
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                },
+            }),
         }
     },
 
     methods: {
-        save(contact, url) {
-            axios.post(url, contact)
-                .then(() => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Message envoyé',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                });
+        async save(contact, url) {
+            try {
+                const result = await axios.post(baseurl + url, contact);
+                if (result.data.statut == 'ok') {
+                    this.Toast.fire(result.data.message, '', 'success');
+                } else {
+                    this.Toast.fire(result.data.message, '', 'error');
+                }
+            } catch (error) {
+                this.Toast.fire(result.data.message, '', 'error');
+            }
         }
     }
 }

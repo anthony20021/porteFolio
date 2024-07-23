@@ -248,7 +248,7 @@
   }
   
   .animate-title h1 {
-    transition: font-size 7s, color 6s;
+    transition: font-size 5s, color 6s;
     overflow: hidden;
     border-right: .15em solid orange;
     white-space: nowrap;
