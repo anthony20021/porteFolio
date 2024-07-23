@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/photo', [App\Http\Controllers\PhotoController::class, 'save']);
         Route::delete('/photo', [App\Http\Controllers\PhotoController::class, 'delete']);
         Route::post('/message', [App\Http\Controllers\SendMailController::class, 'sendEmail']);
+        Route::delete('/message', [App\Http\Controllers\AdminController::class, 'deleteMessage']);
     });
 });
 

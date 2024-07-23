@@ -49,7 +49,7 @@
                             <td>{{ message.sujet }}</td>
                             <td>{{ message.message }}</td>
                             <td>
-                                <button class="btn btn-danger">Supprimer</button>
+                                <button class="btn btn-danger" @click="deleteMessage(message.id)">Supprimer</button>
                                 <button class="btn btn-warning" @click="changeScreen(message.email)">Répondre</button>
                             </td>
                         </tr>
@@ -140,6 +140,20 @@ export default {
                 this.Toast.fire('An error occurred while sending the message', '', 'error');
             }
         },
+
+        async deleteMessage(id){
+            try {
+                const response = await axios.delete(baseurl + '/gestion/message/', { data: { data : { id : id } } } );
+                if (response.data.statut === 'ok') {
+                    this.Toast.fire(response.data.message, '', 'success');
+                } else {
+                    this.Toast.fire(response.data.message, '', 'error');
+                }
+            } catch (error) {
+                this.Toast.fire('An error occurred while deleting the message', '', 'error');
+            }
+        },
+
         loadComponent(component) {
             this.components = component;
         }

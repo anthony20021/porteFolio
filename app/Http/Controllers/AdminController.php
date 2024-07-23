@@ -488,6 +488,32 @@ class AdminController extends Controller
         }
     }
 
+    public function deleteMessage(Request $request){
+        try {
+            $data = $request->input('data');
+    
+            $validatedData = Validator::make($data, [
+                'id' => 'required',
+            ])->validate();
+    
+            $message = Messages::find($validatedData['id']);
+            $message->delete();
+    
+            $result = [
+                'statut' => 'ok',
+                'message' => 'Le message a bien été supprimé',
+                'data' => $message,
+            ];
+            return response()->json($result);
+        } catch (\Throwable $th) {            
+            $result = [
+                'statut' => 'error',
+                'message' => $th->getMessage()
+            ];
+            return response()->json($result, 400);
+        }
+    }
+
     
 
 }
