@@ -75,21 +75,24 @@ class HomeController extends Controller
             'message' => $message,
             'date' => $date,
         ];
-
+    
+        // Vérifier que l'email est valide
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return response()->json(['statut' => 'error', 'message' => 'Adresse email invalide'], 400);
+        }
     
         try {
-
-
             $captchaResult = HomeController::verifyCaptcha($captcha);
-
+    
+            if (!$captchaResult['success'] || $captchaResult['score'] < 0.6) {
+                return response()->json(['statut' => 'error', 'message' => 'Erreur CAPTCHA ('.$captchaResult['score'].')'], 500);
+            }
+    
             DB::beginTransaction();
             Messages::create($data);
-            
+    
             $result = SendMailController::SendMailForContact($data);
-            if(!$captchaResult['success'] || $captchaResult['score'] < 0.6){
-                return response()->json(['statut' => 'error', 'message' => 'erreur capchat ('.$captchaResult['score'].')'], 500);
-            }
-
+            
             if (is_array($result) && isset($result['statut'])) {
                 if ($result['statut'] == 'ok') {
                     DB::commit();
@@ -100,7 +103,7 @@ class HomeController extends Controller
                 }
             } else {
                 DB::rollBack();
-                return response()->json(['statut' => 'error', 'message' => 'Unexpected response format from SendMailForContact'], 400);
+                return response()->json(['statut' => 'error', 'message' => 'Format de réponse inattendu de SendMailForContact'], 400);
             }
         } catch (TransportException $e) {
             return response()->json(['statut' => 'error', 'message' => $e->getMessage() . ' Line ' .  $e->getLine()], 400);
