@@ -47,7 +47,7 @@
             </nav>
 
             <div id="navBar" :style="{ right: navBarRight }" class=" position-fixed bg-black">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mt-5">
                     <li class="nav-items">
                         <button @click="openModal()" class="btn btn-warning text-light">Me contacter</button>
                     </li>
@@ -67,7 +67,7 @@
                     </li>
                 </ul>
             </div>
-            <div style="position: fixed; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.493); z-index: 1000000;" @click="toggleNavBar" v-if="navBarRight !== '-200px'">
+            <div style="position: fixed; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.493); z-index: 999; top: 0px;" @click="toggleNavBar" v-if="navBarRight !== '-200px'">
             </div>
         </div>
     </div>
@@ -127,7 +127,8 @@ export default {
         transition: right 0.6s;
         position: fixed;
         width: 200px;
-        height: calc(100% - 60px);
+        top: 0px;
+        height: 100%;
         z-index: 1000001;
         display: flex;
         flex-direction: column;
