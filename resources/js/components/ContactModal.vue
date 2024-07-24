@@ -87,7 +87,7 @@ export default {
                     this.Toast.fire(result.data.message, '', 'error');
                 }
             } catch (error) {
-                this.Toast.fire(error, '', 'error');
+                this.Toast.fire(error.message, '', 'error');
             }
         }
     }
