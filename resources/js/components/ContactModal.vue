@@ -86,6 +86,7 @@ export default {
             this.recaptchaToken = await recaptcha.execute();
         },
         async save(contact, url) {
+            await this.recaptcha();
             if(!this.recaptchaToken){
                 this.Toast.fire('Erreur de captcha', '', 'error');
                 return
@@ -105,9 +106,6 @@ export default {
             }
         }
     },
-    mounted() {
-        this.recaptcha();
-    }
 }
 </script>
 
