@@ -14,41 +14,38 @@ use Symfony\Component\Mailer\Exception\TransportException;
 class HomeController extends Controller
 {
     public static function verifyCaptcha($token) {
-        $api_key = "6LdVRhcqAAAAAHKp3Wqj2_F1EuLZVgU3gJjcr6O_";
-        $url = 'https://recaptchaenterprise.googleapis.com/v1/projects/portefolio-1721824086450/assessments?key=' . $api_key;
-    
+        $secret_key = "6LdCdRcqAAAAAOEntR7PZllGDGdQSVyULU8-4KpE";
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+
         $data = [
-            'event' => [
-                'token' => $token,
-                'siteKey' => 'YOUR_SITE_KEY'
-            ]
+            'secret' => $secret_key,
+            'response' => $token
         ];
-    
+
         $options = [
             CURLOPT_URL => $url,
             CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => json_encode($data),
-            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+            CURLOPT_POSTFIELDS => http_build_query($data),
             CURLOPT_RETURNTRANSFER => true,
         ];
-    
+
         $ch = curl_init();
         curl_setopt_array($ch, $options);
-    
+
         $response = curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    
+
         curl_close($ch);
-    
+
         if ($http_code != 200) {
             return [
                 'success' => false,
                 'message' => 'Erreur de connexion au service reCAPTCHA'
             ];
         }
-    
+
         $result = json_decode($response, true);
-    
+
         return $result;
     }
 
@@ -85,7 +82,6 @@ class HomeController extends Controller
 
             $captchaResult = HomeController::verifyCaptcha($captcha);
 
-            dd($captchaResult);
             DB::beginTransaction();
             Messages::create($data);
             

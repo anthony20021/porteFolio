@@ -82,7 +82,7 @@ export default {
 
     methods: {
         async recaptcha() {
-            const recaptcha = await load('6LdVRhcqAAAAAHKp3Wqj2_F1EuLZVgU3gJjcr6O_')
+            const recaptcha = await load('6LdCdRcqAAAAACB7olJxSX87njo9Bie2exQZv0Vi')
             this.recaptchaToken = await recaptcha.execute();
         },
         async save(contact, url) {
