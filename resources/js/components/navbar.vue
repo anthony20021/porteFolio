@@ -5,7 +5,7 @@
         style="top:0px; z-index: 1000000; box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.493);">
             <div class="container">
                 <a class="navbar-brand d-flex justify-content-around align-items-center" href="/home">
-                    <h4 style="color: aliceblue; padding: 5px;" class="d-flex text-center mt-2">Portefolio</h4>
+                    <img src="/img/portefolio.png" alt="Laravel" style="filter: invert(1); height: 48px; width: 52px;">
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 16px">
                     <ul class="navbar-nav me-auto" style="align-items: center">
@@ -36,7 +36,7 @@
             style="top:0px; z-index: 1000000;">
                 <div class="mx-2" style="display: flex; justify-content: space-between; width: 100%; height: 100%;">
                     <a class="navbar-brand" style="display: flex; align-items: center; justify-content: center;" href="/home">
-                        <h4 style="color: aliceblue; padding: 5px;" class="d-flex text-center mt-2">PORTEFOLIO</h4>
+                        <img src="/img/portefolio.png" alt="Laravel" style="filter: invert(1); height: 48px; width: 48px;">
                     </a>
                     <div class="d-flex justify-content-center" id="burger" style="align-items: center; height: 100%" @click="toggleNavBar">
                         <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
