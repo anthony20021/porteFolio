@@ -42,6 +42,8 @@
 
 <script>
 
+import { load } from 'recaptcha-v3'
+
 import Trumbowyg from 'vue-trumbowyg';
 import 'trumbowyg/dist/ui/trumbowyg.css';
 import Swal from 'sweetalert2';
@@ -74,11 +76,24 @@ export default {
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 },
             }),
+            recaptchaToken: null,
         }
     },
 
     methods: {
+        async recaptcha() {
+            const recaptcha = await load('6LdVRhcqAAAAAHKp3Wqj2_F1EuLZVgU3gJjcr6O_')
+            this.recaptchaToken = await recaptcha.execute();
+        },
         async save(contact, url) {
+            await this.recaptcha();
+            if(!this.recaptchaToken){
+                this.Toast.fire('Erreur de captcha', '', 'error');
+                return
+            }
+            else{
+                contact.captcha = this.recaptchaToken;
+            }
             try {
                 const result = await axios.post(baseurl + url, contact);
                 if (result.data.statut == 'ok') {

@@ -44,8 +44,8 @@ class SendMailController extends Controller
             $userEmail = $user->email;
 
             $data = [
-                'from' => $userEmail,
-                'reply_to' => $userEmail,
+                'from' => 'contact@anthonygonzalez.website',
+                'reply_to' => 'contact@anthonygonzalez.website',
                 'to' => $to,
                 'sujet' => $request->sujet,
                 'content' => $request->content
