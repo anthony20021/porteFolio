@@ -319,7 +319,7 @@
       width: auto;
     }
     .site{
-      font-size: 20px;
+      font-size: 8px;
     }
     .title-text{
       flex-direction: column;
