@@ -85,7 +85,7 @@ class HomeController extends Controller
 
             $captchaResult = HomeController::verifyCaptcha($captcha);
 
-
+            dd($captchaResult);
             DB::beginTransaction();
             Messages::create($data);
             
