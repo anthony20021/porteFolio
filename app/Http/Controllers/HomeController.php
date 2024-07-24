@@ -90,8 +90,8 @@ class HomeController extends Controller
             Messages::create($data);
             
             $result = SendMailController::SendMailForContact($data);
-            if(!$result['success'] || $result['score'] < 0.6){
-                return response()->json(['statut' => 'error', 'message' => 'erreur capchat ('.$result['score'].')'], 500);
+            if(!$captchaResult['success'] || $captchaResult['score'] < 0.6){
+                return response()->json(['statut' => 'error', 'message' => 'erreur capchat ('.$captchaResult['score'].')'], 500);
             }
 
             if (is_array($result) && isset($result['statut'])) {
