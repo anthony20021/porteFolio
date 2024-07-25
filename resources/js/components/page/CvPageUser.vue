@@ -3,7 +3,7 @@
         <div class="content">
             <h1>{{ cv.name }}</h1>
             <div>
-                <p v-html="cv.desc"></p>
+                <p style="font-family:sans-serif;" v-html="cv.desc"></p>
             </div>
             <div class="image-gallery">
                 <div v-for="document in cv.documents" :key="document.path" class="image-container">
