@@ -78,7 +78,7 @@
           <!-- Section 5: Code Snippets -->
           <div v-if="index === 4" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <h2 class="mb-5 text-start">Quelques bouts de code (c'est gratuit) :</h2>
-            <div v-for="code in codes" class="flex-responsive mb-1" style="align-items: center; justify-content: space-evenly; max-width: 90%; overflow: scroll; background-color: black;">
+            <div v-for="code in codes" class="flex-responsive mb-1" style="align-items: center; justify-content: space-evenly; width: 90%; overflow: scroll; background-color: black;">
               <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; max-width: 40%;">
                 <h4>{{code.name}}</h4>
                 <div style="font-family:sans-serif" v-html="code.desc">
