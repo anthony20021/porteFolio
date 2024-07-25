@@ -78,7 +78,7 @@
           <!-- Section 5: Code Snippets -->
           <div v-if="index === 4">
             <h2 class="mb-5">Quelques bouts de code (c'est gratuit) :</h2>
-            <div v-for="code in codes" class="d-flex" style="align-items: center; justify-content: space-around; width: 100%;">
+            <div v-for="code in codes" class="flex-responsive" style="align-items: center; justify-content: space-around; width: 100%;">
               <h4>{{code.name}}</h4>
               <div v-html="code.desc">
               </div>
@@ -291,7 +291,12 @@
   .end-position {
     top: 10px;
   }
-  
+  .flex-responsive{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+  }
   img {
     width: auto;
     height: 128px;
@@ -311,7 +316,9 @@
     .end-position h1 {
       font-size: 45px;
     }
-
+    .flex-responsive{
+      flex-direction: column;
+    }
     .logo-container {
       flex-direction: column;
     }
