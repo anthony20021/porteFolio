@@ -83,7 +83,7 @@
               <div v-html="code.desc">
               </div>
               <div v-for="document in code.documents">
-                <img :src="document.path" alt="Photo du projet">
+                <img :src="document.path" alt="Photo du projet" style="max-width: 100%; height: auto;">
               </div>
               <button class="btn btn-warning" v-if="!!code.file" @click="download(code.file.path)">Télécharger</button>
             </div>
