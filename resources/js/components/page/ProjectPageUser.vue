@@ -4,7 +4,7 @@
             <h1>{{ project.name }}</h1>
             <div>
                 <p v-html="project.desc"></p>
-                <a v-if="!!project.link" :href="project.link" target="_blank"><button class="btn btn-warning">Go to gitHub</button></a>
+                <a v-if="!!project.path" :href="project.path" target="_blank"><button class="btn btn-warning">Go to gitHub</button></a>
             </div>
             <div class="image-gallery">
                 <div v-for="document in project.documents" :key="document.path" class="image-container">

@@ -35,6 +35,7 @@ class AdminController extends Controller
             $validatedData = Validator::make($data, [
                 'name' => 'required',
                 'desc' => 'required',
+                'path' => 'string',
             ])->validate();
     
             $new_project = Projects::create($validatedData);
@@ -63,6 +64,7 @@ class AdminController extends Controller
                 'name' => 'required',
                 'desc' => 'required',
                 'front_page' => 'required',
+                'path' => 'string'
             ])->validate();
     
             $project = Projects::find($validatedData['id']);
