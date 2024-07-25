@@ -2,7 +2,7 @@
     <div class="container-fluid"> 
         <create-experience></create-experience>
         <h1>Gestion une experience</h1>
-        <button class="btn btn-warning" @click="openModalCreateCode()" >Créer un code</button>
+        <button class="btn btn-warning" @click="openModalCreateCode()" >Créer une experience</button>
         <table class="table table-bordered table-responsive">
             <thead class="table-dark table-sm">
                 <tr>

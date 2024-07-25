@@ -2,7 +2,7 @@
     <div class="container-fluid"> 
         <create-cv></create-cv>
         <h1>Gestion CV</h1>
-        <button class="btn btn-warning" @click="openModalCreateCode()" >Créer un code</button>
+        <button class="btn btn-warning" @click="openModalCreateCode()" >Créer un CV</button>
         <table class="table table-bordered table-responsive">
             <thead class="table-dark table-sm">
                 <tr>
