@@ -81,12 +81,10 @@
             <div v-for="code in codes" class="flex-responsive" style="align-items: center; justify-content: space-evenly; width: 100%;">
               <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                 <h4>{{code.name}}</h4>
-                <div v-html="code.desc">
+                <div style="max-width: 32%;" v-html="code.desc">
                 </div>
               </div>
-              <div v-for="document in code.documents">
-                <img :src="document.path" alt="Photo du projet" class="image">
-              </div>
+              <img v-for="document in code.documents" :src="document.path" alt="Photo du projet" class="image">
               <button class="btn btn-warning" v-if="!!code.file" @click="download(code.file.path)">Télécharger</button>
             </div>
           </div>
