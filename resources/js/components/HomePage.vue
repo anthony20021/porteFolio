@@ -78,10 +78,10 @@
           <!-- Section 5: Code Snippets -->
           <div v-if="index === 4">
             <h2 class="mb-5">Quelques bouts de code (c'est gratuit) :</h2>
-            <div v-for="code in codes" class="flex-responsive" style="align-items: center; justify-content: space-evenly; width: 100%;">
+            <div v-for="code in codes" class="flex-responsive mb-1" style="align-items: center; justify-content: space-evenly; width: 100%; overflow: scroll; background-color: black;">
               <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; max-width: 40%;">
                 <h4>{{code.name}}</h4>
-                <div v-html="code.desc">
+                <div style="font-family:sans-serif" v-html="code.desc">
                 </div>
               </div>
               <img v-for="document in code.documents" :src="document.path" alt="Photo du projet" class="image">
@@ -294,7 +294,6 @@
   }
   .image{
     max-width: 50%;
-    height: auto;
   }
   
   @keyframes typing {
@@ -323,7 +322,6 @@
     }
     .image{
       max-width: 100%;
-      height: auto;
     }
     .site{
       font-size: 8px;
