@@ -17,7 +17,7 @@
   
           <!-- Section 2: Maîtrises -->
           <div v-if="index === 1" class="mb-1">
-            <h2 class="mb-5">Mes maîtrises :</h2>
+            <h2 class="mb-1">Mes maîtrises :</h2>
             <div class="logo-container">
               <div class="w-100 text-center">
                 <h4 class="mt-3">Front-End</h4>
