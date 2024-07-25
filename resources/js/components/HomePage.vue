@@ -311,6 +311,11 @@
     .end-position h1 {
       font-size: 45px;
     }
+    .animate-title {
+      animation: typing 3.5s steps(40, end), 
+        blink-caret .75s step-end infinite;
+    }
+
     .logo-container {
       flex-direction: column;
     }
