@@ -214,7 +214,7 @@ class AdminController extends Controller
     
             $file = $request->file('file');
             $name = strtolower(str_replace(' ', '_', $code->name . '_file'));
-            $extension = $file->guessExtension();
+            $extension = $file->getClientOriginalExtension();
             $filename = $name . '.' . $extension;
     
             $storagePath = public_path('file');
