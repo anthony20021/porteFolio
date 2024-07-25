@@ -13,7 +13,7 @@
                             <input id="nom" type="text" class="form-control" v-model="experience.name">
                         </div>
                         <div class="form-group">
-                            <label for="desc">Description du projet</label>
+                            <label for="desc">Description de l'experience</label>
                             <trumbowyg class="form-control" id="desc" v-model="experience.desc"></trumbowyg>
                         </div>
                         <div class="d-flex justify-content-between">
