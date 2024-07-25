@@ -55,7 +55,7 @@
             <h2 class="mb-5">Mes expériences :</h2>
             <div v-for="experience in experiences" class="d-flex" style="align-items: center; justify-content: space-around; width: 100%;">
               <h4>{{experience.name}}</h4>
-              <div>
+              <div class="p-2" style="max-width: 70%; background-color:black;">
                 <p v-html="experience.desc"></p>
               </div>
             </div>
