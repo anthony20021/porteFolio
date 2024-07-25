@@ -13,6 +13,7 @@
 /phpunit-result-cache.txt
 
 # Ignore compiled assets
+/app/Http/Controllers/HomeController.php
 /public/mix-manifest.json
 /public/hot
 /public/css/*.css
