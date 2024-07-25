@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Fonctions;
 use App\Models\Codes;
 use App\Models\Cv;
 use App\Models\Experiences;
@@ -14,7 +15,7 @@ use Symfony\Component\Mailer\Exception\TransportException;
 class HomeController extends Controller
 {
     public static function verifyCaptcha($token) {
-        $secret_key = "";
+        $secret_key = Fonctions::getApiKey();
         $url = 'https://www.google.com/recaptcha/api/siteverify';
 
         $data = [
