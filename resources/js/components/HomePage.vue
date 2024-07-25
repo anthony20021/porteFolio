@@ -277,11 +277,11 @@
   }
   
   .boucle-on {
-    right: -20px;
+    right: -10px;
   }
   
   .boucle-off {
-    right: 10px;
+    right: 0px;
   }
 
   .title-text{
