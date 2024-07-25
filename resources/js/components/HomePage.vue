@@ -89,14 +89,6 @@
             </div>
           </div>
 
-          <!-- Section 6: CV -->
-          <div v-if="index === 5">
-            <h2 class="mb-5">Mon CV :</h2>
-            <div v-for="oneCv in cv" class="d-flex" style="align-items: center; justify-content: space-around; width: 100%;">
-              <h4>{{oneCv.name}}</h4>
-              <button class="btn btn-warning" v-if="!!oneCv.file" @click="download(oneCv.file.path)">Télécharger</button>
-            </div>
-          </div>
 
         </div>
         <div class="navigation-buttons">
@@ -124,7 +116,6 @@
           { name: 'Expériences' },
           { name: 'Projets' },
           { name: 'Code Snippets' },
-          { name: 'CV' },
         ]
       }
     },
