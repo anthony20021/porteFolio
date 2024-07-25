@@ -14,7 +14,7 @@ use Symfony\Component\Mailer\Exception\TransportException;
 class HomeController extends Controller
 {
     public static function verifyCaptcha($token) {
-        $secret_key = "6LdCdRcqAAAAAOEntR7PZllGDGdQSVyULU8-4KpE";
+        $secret_key = "";
         $url = 'https://www.google.com/recaptcha/api/siteverify';
 
         $data = [

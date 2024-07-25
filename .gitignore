@@ -12,8 +12,9 @@
 /coverage
 /phpunit-result-cache.txt
 
+/app/Classes/Fonctions.php
+
 # Ignore compiled assets
-/app/Http/Controllers/HomeController.php
 /public/mix-manifest.json
 /public/hot
 /public/css/*.css
