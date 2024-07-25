@@ -53,7 +53,7 @@
           <!-- Section 3: Expériences -->
           <div v-if="index === 2">
             <h2 class="mb-5">Mes expériences :</h2>
-            <div v-for="experience in experiences" class="d-flex" style="align-items: center; justify-content: space-between; width: 100%;">
+            <div v-for="experience in experiences" class="d-flex mb-1" style="align-items: center; justify-content: space-between; width: 100%;">
               <h4>{{experience.name}}</h4>
               <div class="p-2" style="max-width: 70%; background-color:black;">
                 <p v-html="experience.desc"></p>
