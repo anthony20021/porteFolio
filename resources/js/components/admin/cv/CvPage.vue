@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid"> 
         <create-cv></create-cv>
-        <h1>Gestion une experience</h1>
+        <h1>Gestion CV</h1>
         <button class="btn btn-warning" @click="openModalCreateCode()" >Créer un code</button>
         <table class="table table-bordered table-responsive">
             <thead class="table-dark table-sm">
