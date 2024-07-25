@@ -85,7 +85,7 @@
               </div>
               </div>
               <div v-for="document in code.documents">
-                <img :src="document.path" alt="Photo du projet" style="max-width: 100%; height: auto;">
+                <img :src="document.path" alt="Photo du projet" class="image">
               </div>
               <button class="btn btn-warning" v-if="!!code.file" @click="download(code.file.path)">Télécharger</button>
             </div>
@@ -294,6 +294,10 @@
     width: auto;
     height: 128px;
   }
+  .image{
+    max-width: 50%;
+    height: auto;
+  }
   
   @keyframes typing {
     from { width: 0 }
@@ -318,6 +322,10 @@
     img {
       height: 64px;
       width: auto;
+    }
+    .image{
+      max-width: 100%;
+      height: auto;
     }
     .site{
       font-size: 8px;
