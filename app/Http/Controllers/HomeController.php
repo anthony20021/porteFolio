@@ -85,7 +85,7 @@ class HomeController extends Controller
         try {
             $captchaResult = HomeController::verifyCaptcha($captcha);
     
-            if (!$captchaResult['success'] || $captchaResult['score'] < 0.6) {
+            if (!$captchaResult['success'] || $captchaResult['score'] < 0.4) {
                 return response()->json(['statut' => 'error', 'message' => 'Erreur CAPTCHA ('.$captchaResult['score'].')'], 500);
             }
     
