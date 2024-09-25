@@ -1,0 +1,34 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@planfor.local
+    DocumentRoot /var/www/html/rte/public
+    ServerName rte.planfor.local
+    ServerAlias demo-rte.planfor.local
+    ServerAlias rte.planfor.fr
+    ErrorLog /var/log/apache2/rte_error_log
+    CustomLog /var/log/apache2/rte_access_log combined
+
+    RewriteEngine On
+#	SSLEngine on
+#    SSLProtocol all -SSLv2 -SSLv3
+#    SSLCipherSuite HIGH:MEDIUM
+#
+#    SSLVeriFyClient None
+
+#    SSLCertificateFile /etc/letsencrypt/live/dev.planfor.net/fullchain.pem
+#    SSLCertificateKeyFile /etc/letsencrypt/live/dev.planfor.net/privkey.pem   
+#  Protocols h2 http/1.1
+  <Directory /var/www/html/rte/public>
+       	AllowOverride FileInfo AuthConfig Limit
+       	Options +FollowSymLinks +IncludesNoExec
+		DirectoryIndex index.php index.htm index.html
+
+       <Limit GET POST OPTIONS PUT PATCH DELETE>
+        	Require all granted
+	   #	Require valid-user
+       </Limit>
+       <LimitExcept GET POST OPTIONS PATCH PUT DELETE>
+           	Require all denied
+       </LimitExcept>
+   </Directory>
+</VirtualHost>
+
